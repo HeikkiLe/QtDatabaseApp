@@ -6,17 +6,23 @@ Database::Database()
 
 }
 
-void Database::ReadData()
+void Database::ReadData(QString query)
 {
     QSqlDatabase db = QSqlDatabase::addDatabase("QODBC");
 
     db.setDatabaseName(connectionString);
     if(db.open())
     {
-        QSqlQuery selectAll("SELECT CompanyName FROM Customers");
-        while(selectAll.next())
+        if(query.isEmpty())
         {
-            QString CompanyName = selectAll.value(0).toString();
+            query = "SELECT CompanyName FROM Customers";
+        }
+
+        QSqlQuery finalQuery(query);
+
+        while(finalQuery.next())
+        {
+            QString CompanyName = finalQuery.value(0).toString();
             qInfo() << "Value: " << CompanyName << endl;
         }
     }

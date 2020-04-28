@@ -7,6 +7,7 @@
 #include <QMessageBox>
 #include <QtConcurrent>
 #include <QThread>
+#include <QInputDialog>
 
 
 DatabaseApp::DatabaseApp(QWidget *parent)
@@ -38,8 +39,8 @@ void DatabaseApp::on_actionOpen_Connection_triggered()
 
     std::unique_ptr<Database> database = std::make_unique<Database>();
 
-    QFuture<void> future = QtConcurrent::run(this, &DatabaseApp::readToDatabase, &finalData);
-    //readToDatabase(finalData);
+    //QFuture<void> future = QtConcurrent::run(this, &DatabaseApp::readToDatabase, &finalData);
+    readToDatabase(finalData);
 
     try
     {
@@ -59,6 +60,29 @@ void DatabaseApp::on_actionPrint_Data_To_Screen_triggered()
 {
     // read COM port in a separate thread to prevent GUI blocking
     QFuture<void> future = QtConcurrent::run(this, &DatabaseApp::readToChart);
+}
+
+void DatabaseApp::on_actionCustom_Query_triggered()
+{
+    bool ok;
+    QString query = QInputDialog::getText(this, tr("Custom Query"),
+                                          tr("Give query or leave empty for default:"), QLineEdit::Normal,
+                                          "query", &ok);
+
+    if(ok)
+    {
+        std::unique_ptr<Database> database = std::make_unique<Database>();
+        try
+        {
+            database->ReadData(query);
+        }
+        catch (std::exception e)
+        {
+            QString message = "Error! ";
+            message += e.what();
+            QMessageBox::critical(this, "Error", message);
+        }
+    }
 }
 
 void DatabaseApp::on_actionExit_triggered()

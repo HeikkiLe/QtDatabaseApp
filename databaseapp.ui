@@ -40,6 +40,7 @@
     </property>
     <addaction name="actionOpen_Connection"/>
     <addaction name="actionPrint_Data_To_Screen"/>
+    <addaction name="actionCustom_Query"/>
     <addaction name="actionExit"/>
    </widget>
    <addaction name="menuFile"/>
@@ -58,6 +59,11 @@
   <action name="actionPrint_Data_To_Screen">
    <property name="text">
     <string>Print Data To Screen</string>
+   </property>
+  </action>
+  <action name="actionCustom_Query">
+   <property name="text">
+    <string>Custom Query</string>
    </property>
   </action>
  </widget>

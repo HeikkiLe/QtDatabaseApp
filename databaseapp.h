@@ -29,6 +29,8 @@ private slots:
 
     void on_actionPrint_Data_To_Screen_triggered();
 
+    void on_actionCustom_Query_triggered();
+
 signals:
     void onValueChanged(float value);
 

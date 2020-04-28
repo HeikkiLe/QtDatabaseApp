@@ -14,7 +14,7 @@ class Database
 public:
     Database();
 
-    void ReadData();
+    void ReadData(QString query);
 
     void WriteData(const std::array<float, MEASUREMENT_DATA> input);
 
