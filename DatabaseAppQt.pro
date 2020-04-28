@@ -20,7 +20,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     chart.cpp \
     database.cpp \
-    datatable.cpp \
     main.cpp \
     databaseapp.cpp \
     serial.cpp
@@ -29,7 +28,6 @@ HEADERS += \
     chart.h \
     database.h \
     databaseapp.h \
-    datatable.h \
     serial.h
 
 FORMS += \
